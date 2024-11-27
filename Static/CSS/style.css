@@ -1,0 +1,144 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    font-family: Arial, sans-serif;
+    background-color: #F9F1E6;
+    color: #2B1901;
+    line-height: 1.6;
+}
+
+
+/* Header Styling and Nav Stuff */
+header
+{
+    background-color: #55442E;
+    color: #F9F1E6;
+    padding: 5px;
+    text-align: center;
+}
+
+#title
+{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+}
+
+#title h1
+{
+    font-size: 2.5rem;
+    margin-right: 20px;
+    color: #2B1901;
+}
+
+nav ul
+{
+    list-style-type: none;
+    display: flex;
+    padding-left: 50px;
+}
+
+nav ul li
+{
+    margin-right: 15px;
+}
+
+nav ul li a
+{
+    text-decoration: none;
+    color: #2B1901;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    padding-left: 30px;
+}
+
+nav ul li a:hover
+{
+    color: #B8AC9E;
+}
+
+main
+{
+    padding: 20px;
+}
+
+section
+{
+    background-color: #FFFFFF;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2
+{
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+section p
+{
+    font-size: 1.1rem;
+}
+
+
+/* Why Us */
+/* Centering the section title */
+.why-us h2
+{
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Flexbox for the text columns */
+.why-us-columns
+{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.why-us-column
+{
+    width: 30%;
+}
+
+.why-us-column h4
+{
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.why-us-column p
+{
+    text-align: center;
+    font-size: 1rem;
+}
+
+.background-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+
+/* Footer */
+footer
+{
+    background-color: #2B1901;
+    color: #F9F1E6;
+    text-align: center;
+    padding: 15px;
+    font-size: 1rem;
+}
