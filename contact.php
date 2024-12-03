@@ -8,14 +8,23 @@
 </head>
 <body>
 <header>
+
+    <?php
+
+    $navCaptions = ["Home", "About","Contact","Products"];
+    $navLinks = ["index.php","about.php","contact.php", "items.php"];
+
+    ?>
+
     <div id="title">
         <h1>Candle Shop</h1>
         <nav>
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="items.php">Buy</a></li>
+                <?php
+                foreach ($navCaptions as $index => $caption) {
+                    echo "<li><a href=\"{$navLinks[$index]}\">$caption</a></li>";
+                }
+                ?>
             </ul>
         </nav>
     </div>

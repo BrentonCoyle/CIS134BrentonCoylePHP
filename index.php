@@ -8,14 +8,23 @@
 </head>
 <body>
 <header>
+
+    <?php
+
+    $navCaptions = ["Home", "About","Contact","Products"];
+    $navLinks = ["index.php","about.php","contact.php", "items.php"];
+
+    ?>
+
     <div id="title">
         <h1>Candle Shop</h1>
         <nav>
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="items.php">Buy</a></li>
+                <?php
+                foreach ($navCaptions as $index => $caption) {
+                    echo "<li><a href=\"{$navLinks[$index]}\">$caption</a></li>";
+                }
+                ?>
             </ul>
         </nav>
     </div>
@@ -25,12 +34,6 @@
 <main>
 
     <!--W3 Schools is awesome!!!!-->
-    <?php
-    include 'phpFiles/helpers.php';
-
-    $candleNames = ["Pumpkin Spice", "Lavender", "Vanilla Bean"];
-    $candlePrices = ["7.99", "8.99", "6.99"];
-    ?>
 
     <div class="background-image-container">
         <img src="Static/Images/Background.png" alt="Flower Field with Beehives" class="background-image">
@@ -70,12 +73,6 @@
         <h2>Top Sellers</h2>
 
         <p>Later when we add a database I'm putting items here that are the top 4 sellers at the current time in the database like this</p>
-
-        <?php
-        $a = candles($candleNames, $candlePrices);
-        echo $a;
-
-        ?>
     </section>
 
 </main>
