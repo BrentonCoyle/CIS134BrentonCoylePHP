@@ -17,6 +17,10 @@
 
 <main>
 
+    <?php
+    include 'inc_welcome.php';
+    ?>
+
     <!--W3 Schools is awesome!!!!-->
 
     <div class="background-image-container">

@@ -16,6 +16,11 @@
 </header>
 
 <main>
+
+    <?php
+    include 'inc_welcome.php';
+    ?>
+
     <p>Products page version 1</p>
 
     <?php
