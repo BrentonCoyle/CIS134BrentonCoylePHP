@@ -10,24 +10,8 @@
 <header>
 
     <?php
-
-    $navCaptions = ["Home", "About","Contact","Products"];
-    $navLinks = ["index.php","about.php","contact.php", "items.php"];
-
+    require 'inc_navigation.php';
     ?>
-
-    <div id="title">
-        <h1>Candle Shop</h1>
-        <nav>
-            <ul>
-                <?php
-                foreach ($navCaptions as $index => $caption) {
-                    echo "<li><a href=\"{$navLinks[$index]}\">$caption</a></li>";
-                }
-                ?>
-            </ul>
-        </nav>
-    </div>
 
 </header>
 
