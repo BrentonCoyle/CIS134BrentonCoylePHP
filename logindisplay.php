@@ -17,7 +17,14 @@
 
 <main>
 
-
+    <p><b>Results from Form</b></p>
+    <?php
+    $Username = $_POST['Username'];
+    $Password = $_POST['Password'];
+    echo "<p>Thank you, $Username for signing in.</p>\n";
+    echo "<p>Username: $Username </p>\n";
+    echo "<p>Password: $Password </p>\n";
+    ?>
 
 
 </main>

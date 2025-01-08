@@ -1,7 +1,7 @@
 <?php
 // Define navigation data
-$navCaptions = ["Home", "About", "Contact", "Products","Class Files"];
-$navLinks = ["index.php", "about.php", "contact.php", "items.php","class_files.php"];
+$navCaptions = ["Home", "About", "Contact", "Products","Item Form","Class Files"];
+$navLinks = ["index.php", "about.php", "contact.php", "items.php","itemform.php","class_files.php"];
 ?>
 
 <div id="title">

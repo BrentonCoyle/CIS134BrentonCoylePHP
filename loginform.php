@@ -17,6 +17,16 @@
 
 <main>
 
+    <p><b>Form For Login</b></p>
+    <form name="login" action="logindisplay.php" method="post">
+        <p>Your Username: <input type="text" name="Username" value="" /></p>
+        <p>Your Password: <input type="text" name="Password" value="" size="5" /></p>
+        <p>
+            <input type="reset" value="Clear Form" />
+            &nbsp;&nbsp;
+            <input type="submit" name="Submit" value="Send Form" />
+        </p>
+    </form>
 
 
 
