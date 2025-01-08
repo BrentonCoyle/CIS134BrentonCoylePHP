@@ -17,24 +17,53 @@
 
 <main>
 
-    <?php
-    include 'inc_welcome.php';
-    ?>
+
 
 
     <?php
-
-    $Passwords = ["Brenton_Coyle2025","Luke_Matheis2025","Wow_Its_2025","CandleStore#1","GoodPassword$100","bad","Brenton1","ColdOut25#","badpassword#2","lassword"];
+    // GIT GIVE ME A HEART-ATTACK IT SAID GENERIC PASSWORD LEAKED ON MY ACCOUNT
+    // I THOUGHT MY GITHUB ACCOUNT WAS LEAKED IT WAS BECAUSE I USED A NAME AND THE DATE
+    $Passwords = ["Brenton_Coyle2025","Luke_Matheis2025","Wow_Its_2025","CandleStore#1","GoodPassword$100","bad password","Brenton1","ColdOut25#","badpassword#2","lassword"];
 
     function checkPassword($Passwords){
-        $txt = "";
-        $len = count($candleName);
-        for($i = 0; $i < $len; $i++){
+        foreach($Passwords as $Password)
+        {
+            $hasSpecialChar = preg_match('/[\W_]/', $Password);
+            $hasNumber = preg_match('/\d/', $Password);
+            $hasUpperCase = preg_match('/[A-Z]/', $Password);
+            $hasLowerCase = preg_match('/[a-z]/', $Password);
 
-            $txt = $txt."Name: $candleName[$i]<br> Price: $candlePrice[$i].<br><br>";
+            if ($hasSpecialChar && $hasNumber && $hasUpperCase && $hasLowerCase && strlen($Password) >= 12 && !preg_match('/\s/', $Password)) {
+                echo "<p>The password '$Password' is strong.</p>";
+        } else {
+                if($hasSpecialChar == 0)
+                {
+                    echo "<p>The password '$Password' does not have a Special Char  (Bad).</p>";
+                }
+                if($hasNumber == 0)
+                {
+                    echo "<p>The password '$Password' does not have a Number  (Bad).</p>";
+                }
+                if($hasUpperCase == 0)
+                {
+                    echo "<p>The password '$Password' does not have a Upper Case Letter  (Bad).</p>";
+                }
+                if($hasLowerCase == 0)
+                {
+                    echo "<p>The password '$Password' does not have a Lower Case Letter  (Bad).</p>";
+                }
+                if(preg_match('/\s/', $Password))
+                {
+                    echo "<p>The password '$Password' has a space (Bad).</p>";
+                }
+                if(strlen($Password) < 12)
+                {
+                    echo "<p>The password '$Password' has too short.</p>";
+                }
+            }
         }
-        return $txt;
     }
+    checkPassword($Passwords);
     ?>
 
 
