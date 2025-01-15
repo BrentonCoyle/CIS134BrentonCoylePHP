@@ -19,11 +19,40 @@
 
     <p><b>Results from Form</b></p>
     <?php
+
     $Username = $_POST['Username'];
     $Password = $_POST['Password'];
-    echo "<p>Thank you, $Username for signing in.</p>\n";
-    echo "<p>Username: $Username </p>\n";
-    echo "<p>Password: $Password </p>\n";
+
+
+    function searchPasswordFile($username, $password)
+    {
+        $PasswordFile = "password.txt";
+        $fp = fopen($PasswordFile, "r");
+
+        $usernames = explode(" ", trim(fgets($fp)));
+        $passwords = explode(" ", trim(fgets($fp)));
+
+        fclose($fp);
+
+
+        for ($i = 0; $i < count($usernames); $i++) {
+            if ($usernames[$i] == $username && $passwords[$i] == $password) {
+                echo "Match Found!";
+                return true;
+            }
+        }
+        echo "No Match Found!";
+        return false;
+
+    }
+
+    $isLoggedIn = SearchPasswordFile($Username, $Password);
+
+    if ($isLoggedIn) {
+        echo "User is logged in.<br>";
+    } else {
+        echo "User is not logged in.<br>";
+    }
     ?>
 
 
