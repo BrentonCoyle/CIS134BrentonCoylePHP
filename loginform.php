@@ -25,6 +25,8 @@
             <input type="reset" value="Clear Form" />
             &nbsp;&nbsp;
             <input type="submit" name="Submit" value="Send Form" />
+
+            <input type="submit" name="Create" value="Create Account" />
         </p>
     </form>
 

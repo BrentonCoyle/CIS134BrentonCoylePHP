@@ -20,9 +20,48 @@
     <p><b>Results from Form</b></p>
     <?php
 
-    $Username = $_POST['Username'];
-    $Password = $_POST['Password'];
+    if(isset($_POST['Submit'])) {
+        $Username = $_POST['Username'];
+        $Password = $_POST['Password'];
 
+        $isLoggedIn = SearchPasswordFile($Username, $Password);
+
+        if ($isLoggedIn) {
+            echo "User is logged in.<br>";
+        } else {
+            echo "User is not logged in.<br>";
+        }
+
+    }
+
+    if(isset($_POST['Create']))
+    {
+        $Username = $_POST['Username'];
+        $Password = $_POST['Password'];
+        $PasswordFile = "password.txt";
+
+        $FileArray = file('password.txt', FILE_IGNORE_NEW_LINES);
+        $UsernamesLine = $FileArray[0];
+        $PasswordsLine = $FileArray[1];
+
+        $UsernamesLine .= " " . $Username;
+
+        $PasswordsLine .= " " . $Password;
+
+
+        $fp = fopen($PasswordFile, "w");
+
+        if ($fp) {
+            fwrite($fp, $UsernamesLine . "\n");
+            fwrite($fp, $PasswordsLine . "\n");
+            fclose($fp);
+
+            echo "Account created successfully!<br>";
+        } else {
+            echo "Failed to create account.<br>";
+        }
+
+    }
 
     function searchPasswordFile($username, $password)
     {
@@ -46,13 +85,7 @@
 
     }
 
-    $isLoggedIn = SearchPasswordFile($Username, $Password);
 
-    if ($isLoggedIn) {
-        echo "User is logged in.<br>";
-    } else {
-        echo "User is not logged in.<br>";
-    }
     ?>
 
 
