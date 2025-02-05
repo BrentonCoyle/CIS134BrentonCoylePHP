@@ -106,24 +106,28 @@
 
 <main>
     <?php
+
+        require_once('databaseconnect_inc.php');
+        $TABLENAME="items";
+
+
+
         if (isset($_POST['Submit']))
         {
-            echo "<p>Your form has been submitted. Thank you.</p>\n";
-            if(empty($Choice))
+            echo "<p>Your item has been submitted. Thank you.</p>\n";
+            if(empty($_POST['choice']))
             {
                 echo "Choice is required";
             } else
             {
-                $Choice = $_POST['Choice'];
+                $Choice = $_POST['choice'];
                 echo "<p>Choice: $Choice </p>\n";
             }
 
 
             if(!empty($_POST['Smell'])) {
-                echo "<p>Smell: Fragrance</p>\n";
-            } else {
-                echo "<p>Smell: Plain</p>\n";
-            }
+                echo "<p>Choice: {$_POST['Smell']} </p>\n";
+            } else {echo "Choice is required"; }
 
 
             if (!empty($_POST['Time'])) {
@@ -153,29 +157,33 @@
 
     ?>
     <form name="item" action="itemform.php" method="post">
-        <p>What Type of Candle Do You Prefer</p>
+        <p>What Type of Candle</p>
         <label>
-            <input type="radio" name="choice" value="Option1"> Pillar Candle
+            <input type="radio" name="choice" value="Pillar Candle"> Pillar Candle
         </label>
 
         <label>
-            <input type="radio" name="choice" value="Option2"> Wax Melt
+            <input type="radio" name="choice" value="Wax Melt"> Wax Melt
         </label>
 
         <label>
-            <input type="radio" name="choice" value="Option3"> Novelty
+            <input type="radio" name="choice" value="Novelty"> Novelty
         </label>
 
         <label>
-            <input type="radio" name="choice" value="Option4"> Taper
+            <input type="radio" name="choice" value="Taper"> Taper
         </label>
 
 
-        <p>Do want a Fragrance in Your Candles  <input type="checkbox" name="Smell" value="" size="6" /></p>
+        <p>Fragrance Name<input type="text" name="Smell" placeholder="Fragrance" value="" /></p>
 
 
-        <p>How Long would you want your candles to burn for:  <input type="number" name="Time" placeholder="Enter Minutes" </></p>
+        <p>How Long does the candle burn for:  <input type="number" name="Time" placeholder="Enter Minutes" </></p>
 
+
+        <p>What is the candle name<input type="text" name="Name" placeholder="Enter Name" </></p>
+
+        <p>Candle Price:  <input type="number" name="Price" placeholder="Enter Price" </></p>
 
         <p>
             <input type="reset" value="Clear Form" />
