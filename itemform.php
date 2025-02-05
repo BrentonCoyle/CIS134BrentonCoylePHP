@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -108,52 +108,54 @@
     <?php
 
         require_once('databaseconnect_inc.php');
-        $TABLENAME="items";
 
-
-
-        if (isset($_POST['Submit']))
+        if(isset($_POST['Submit']))
         {
-            echo "<p>Your item has been submitted. Thank you.</p>\n";
-            if(empty($_POST['choice']))
-            {
-                echo "Choice is required";
-            } else
-            {
-                $Choice = $_POST['choice'];
-                echo "<p>Choice: $Choice </p>\n";
-            }
 
-
-            if(!empty($_POST['Smell'])) {
-                echo "<p>Choice: {$_POST['Smell']} </p>\n";
-            } else {echo "Choice is required"; }
-
-
-            if (!empty($_POST['Time'])) {
-                $Time = $_POST['Time'];
-                if ($Time > 0) {
-
-                    echo "<p>Time: $Time Minutes</p>\n";
-                } else {
-
-                    echo "<p>Time must be greater than 0</p>\n";
-                }
+            if (empty(trim($_POST['Name']))) {
+                echo "Name is required";
             } else {
-
-                echo "<p>Time is required</p>\n";
+                $name = $_POST['Name'];
             }
 
+            if (empty(trim($_POST['choice']))) {
+                echo "Name is required";
+            } else {
+                $choice = $_POST['choice'];
+            }
 
+            if (empty(trim($_POST['Smell']))) {
+                echo "Smell is required";
+            } else {
+                $smell = $_POST['Smell'];
+            }
 
+            if (empty($_POST['Time']) || !is_numeric($_POST['Time'])) {
+                echo "Valid burn time is required";
+            } else {
+                $time = $_POST['Time'];
+            }
 
+            if (empty($_POST['Price']) || !is_numeric($_POST['Price'])) {
+                echo "Valid burn time is required";
+            } else {
+                $price = $_POST['Price'];
+            }
 
+            $TABLENAME = "items";
+            $InsertTableStatement = "INSERT INTO $TABLENAME (item_name, item_type, item_smell, item_burn_time, item_price) 
+                             VALUES ('$name', '$choice', '$smell', '$time', '$price')";
 
-
-
-
-
+            if(!empty(trim($_POST['Name'])) and !empty(trim($_POST['choice'])) and !empty(trim($_POST['Time'])) and !empty(trim($_POST['Price'])) and !empty(trim($_POST['Smell']))) {
+                // This is an error but it works so idk
+                if ($DBConnect->query($InsertTableStatement)) {
+                    echo "New record created successfully!";
+                } else {
+                    echo "Error: " . $InsertTableStatement . "<br>" . $DBConnect->error;
+                }
+            }
         }
+
 
     ?>
     <form name="item" action="itemform.php" method="post">
@@ -161,29 +163,20 @@
         <label>
             <input type="radio" name="choice" value="Pillar Candle"> Pillar Candle
         </label>
-
         <label>
             <input type="radio" name="choice" value="Wax Melt"> Wax Melt
         </label>
-
         <label>
             <input type="radio" name="choice" value="Novelty"> Novelty
         </label>
-
         <label>
             <input type="radio" name="choice" value="Taper"> Taper
         </label>
 
-
         <p>Fragrance Name<input type="text" name="Smell" placeholder="Fragrance" value="" /></p>
-
-
-        <p>How Long does the candle burn for:  <input type="number" name="Time" placeholder="Enter Minutes" </></p>
-
-
-        <p>What is the candle name<input type="text" name="Name" placeholder="Enter Name" </></p>
-
-        <p>Candle Price:  <input type="number" name="Price" placeholder="Enter Price" </></p>
+        <p>How Long does the candle burn for: <input type="number" name="Time" placeholder="Enter Minutes" /></p>
+        <p>What is the candle name<input type="text" name="Name" placeholder="Enter Name" /></p>
+        <p>Candle Price: <input type="number" step="0.1" name="Price" placeholder="Enter Price" /></p>
 
         <p>
             <input type="reset" value="Clear Form" />
@@ -191,6 +184,7 @@
             <input type="submit" name="Submit" value="Send Form" />
         </p>
     </form>
+
 
 </main>
 
