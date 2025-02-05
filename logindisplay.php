@@ -75,6 +75,8 @@
 
 
         for ($i = 0; $i < count($usernames); $i++) {
+
+
             if ($usernames[$i] == $username && $passwords[$i] == $password) {
                 echo "Match Found!";
                 return true;
