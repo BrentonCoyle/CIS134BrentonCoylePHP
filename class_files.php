@@ -19,8 +19,8 @@
 
     <?php
     // Define navigation data
-    $navCaptions = ["Unit 4 Passwords","Unit 5 Autoglobals", "Unit 5 Form P1", "Unit 5 Display P1"];
-    $navLinks = ["password.php","autoglobals.php","loginform.php","logindisplay.php"];
+    $navCaptions = ["Unit 4 Passwords","Unit 5 Autoglobals", "Unit 5 Display P1"];
+    $navLinks = ["password.php","autoglobals.php","logindisplay.php"];
     ?>
 
     <div id="title">

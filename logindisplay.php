@@ -1,3 +1,51 @@
+<?php
+// Start the session to store session data
+session_start();
+
+// Check if the login form is submitted
+if (isset($_POST['Submit'])) {
+    $Username = $_POST['Username'];
+    $Password = $_POST['Password'];
+
+    $isLoggedIn = searchPasswordFile($Username, $Password);
+
+    if ($isLoggedIn) {
+        // Store username in a cookie for 30 days
+        setcookie("Username", $Username, time() + 60 * 60 * 24 * 30);
+
+        // Store session data: login success (true)
+        $_SESSION['isLoggedIn'] = true;
+        $_SESSION['Username'] = $Username;
+
+
+    } else {
+        // Store session data: login failure (false)
+        $_SESSION['isLoggedIn'] = false;
+    }
+}
+
+// Corrected function name to match how you call it
+function searchPasswordFile($username, $password)
+{
+    $PasswordFile = "password.txt";
+    $fp = fopen($PasswordFile, "r");
+
+    // Read in the usernames and passwords from the file
+    $usernames = explode(" ", trim(fgets($fp)));
+    $passwords = explode(" ", trim(fgets($fp)));
+
+    fclose($fp);
+
+    // Check for a match in the file
+    for ($i = 0; $i < count($usernames); $i++) {
+        if ($usernames[$i] == $username && $passwords[$i] == $password) {
+            return true;
+        }
+    }
+    return false;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,94 +56,29 @@
 </head>
 <body>
 <header>
-
-    <?php
-    require 'inc_navigation.php';
-    ?>
-
+    <?php require 'inc_navigation.php'; ?>
 </header>
 
 <main>
 
     <p><b>Results from Form</b></p>
     <?php
-
-    if(isset($_POST['Submit'])) {
-        $Username = $_POST['Username'];
-        $Password = $_POST['Password'];
-
-        $isLoggedIn = SearchPasswordFile($Username, $Password);
-
-        if ($isLoggedIn) {
-            echo "User is logged in.<br>";
+    // Checking if session variable 'isLoggedIn' exists
+    if (isset($_SESSION['isLoggedIn'])) {
+        if ($_SESSION['isLoggedIn']) {
+            echo "You are logged in.<br>";
+            echo "Username: $Username and Password: $Password";
         } else {
-            echo "User is not logged in.<br>";
+            echo "Login failed.<br>";
         }
-
     }
-
-    if(isset($_POST['Create']))
-    {
-        $Username = $_POST['Username'];
-        $Password = $_POST['Password'];
-        $PasswordFile = "password.txt";
-
-        $FileArray = file('password.txt', FILE_IGNORE_NEW_LINES);
-        $UsernamesLine = $FileArray[0];
-        $PasswordsLine = $FileArray[1];
-
-        $UsernamesLine .= " " . $Username;
-
-        $PasswordsLine .= " " . $Password;
-
-
-        $fp = fopen($PasswordFile, "w");
-
-        if ($fp) {
-            fwrite($fp, $UsernamesLine . "\n");
-            fwrite($fp, $PasswordsLine . "\n");
-            fclose($fp);
-
-            echo "Account created successfully!<br>";
-        } else {
-            echo "Failed to create account.<br>";
-        }
-
-    }
-
-    function searchPasswordFile($username, $password)
-    {
-        $PasswordFile = "password.txt";
-        $fp = fopen($PasswordFile, "r");
-
-        $usernames = explode(" ", trim(fgets($fp)));
-        $passwords = explode(" ", trim(fgets($fp)));
-
-        fclose($fp);
-
-
-        for ($i = 0; $i < count($usernames); $i++) {
-
-
-            if ($usernames[$i] == $username && $passwords[$i] == $password) {
-                echo "Match Found!";
-                return true;
-            }
-        }
-        echo "No Match Found!";
-        return false;
-
-    }
-
-
     ?>
+
 
 
 </main>
 
-<?php
-require 'inc_footer.php';
-?>
+<?php require 'inc_footer.php'; ?>
 
 </body>
 </html>
